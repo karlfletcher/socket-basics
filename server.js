@@ -20,7 +20,8 @@ io.on('connection', function(socket){
 
 	socket.emit('message', {
 		text: "Welcome to chatty chat face",
-		timestamp: now.valueOf()
+		timestamp: now.valueOf(),
+		name: 'Server'
 	});
 });
 
