@@ -5,6 +5,9 @@ var app = express();
 
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var moment = require('moment');
+
+var now = moment();
 
 app.use(express.static(__dirname + '/public'));
 
@@ -12,12 +15,12 @@ io.on('connection', function(socket){
 	console.log('User connected via socket.io!');
 
 	socket.on('message', function(message){
-		console.log('Message received: ' + message.text);
 		io.emit('message', message);
 	});
 
 	socket.emit('message', {
-		text: "Welcome to chatty chat face"
+		text: "Welcome to chatty chat face",
+		timestamp: now.valueOf()
 	});
 });
 
