@@ -4,10 +4,14 @@ var now = moment();
 var name = getQueryVariable('name') || "Anon";
 var room = getQueryVariable('room');
 
-console.log(name + " want to join room " + room);
+$('.room-name').text(room);
 
 socket.on('connect', function(){
 	console.log("Connected to socket.io server");
+	socket.emit('joinRoom', {
+		name: name,
+		room: room
+	})
 });
 
 socket.on('message', function(message){
